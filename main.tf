@@ -29,7 +29,7 @@ module "vnet_diagnostics" {
   logs    = ["VMProtectionAlerts", "VMInsights", "NetworkSecurityGroupEvent"]
   metrics = ["AllMetrics"]
 }
-module "nsg_diagnostics" {
+/* module "nsg_diagnostics" {
   source = "./modules/diagnostic_settings"
 
   resource_name      = module.networking.nsg_name
@@ -42,7 +42,7 @@ module "nsg_diagnostics" {
   ]
 
   metrics = ["AllMetrics"]
-}
+} */
 module "storage_diagnostics" {
   source = "./modules/diagnostic_settings"
 
@@ -58,7 +58,7 @@ module "storage_diagnostics" {
 
   metrics = ["AllMetrics"]
 }
-module "keyvault_diagnostics" {
+/* module "keyvault_diagnostics" {
   source = "./modules/diagnostic_settings"
 
   resource_name      = module.keyvault.name
@@ -82,7 +82,7 @@ module "firewall_diagnostics" {
   ]
 
   metrics = ["AllMetrics"]
-}
+} */
 module "network_watcher" {
   source = "./modules/network_watcher"
 
