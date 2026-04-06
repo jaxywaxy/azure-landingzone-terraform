@@ -6,6 +6,10 @@ on:
     branches: [ main ]
   pull_request:
 
+concurrency:
+  group: terraform
+  cancel-in-progress: true
+
 jobs:
   terraform-plan:
     runs-on: ubuntu-latest
@@ -35,6 +39,13 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Debug OIDC Token
+        run: |
+          echo "GITHUB_REF: $GITHUB_REF"
+          echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
+          echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
+          echo "GITHUB_ENVIRONMENT: $GITHUB_ENVIRONMENT"
 
       - name: Terraform Init
         run: terraform init
