@@ -9,4 +9,3 @@ variable "location" {
 variable "rg_network" {
   type = string
 }
-
