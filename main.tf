@@ -6,9 +6,9 @@ module "resource_groups" {
 }
 
 module "networking" {
-  source        = "./modules/networking"
-  prefix        = var.prefix
-  location      = var.location
+  source     = "./modules/networking"
+  prefix     = var.prefix
+  location   = var.location
   rg_network = module.resource_groups.networking_name
 }
 
