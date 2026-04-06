@@ -9,7 +9,7 @@ on:
 permissions: 
   id-token: write
   contents: read
-  pull_request: write
+  pull-request: write
 
 concurrency:
   group: terraform
