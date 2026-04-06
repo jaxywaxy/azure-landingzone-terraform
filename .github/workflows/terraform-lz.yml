@@ -69,12 +69,14 @@ jobs:
         run: |
           curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scripts/install.sh | sh
 
+      - name: Set Infracost API key
+        run: infracost configure set api_key ${{ secrets.INFRACOST_API_KEY }}
+
       - name: Generate Infracost breakdown
         run: |
           infracost breakdown --path . \
             --format json \
             --out-file infracost.json \
-            --api-key ${{ secrets.INFRACOST_API_KEY }}
 
       - name: Generate Infracost diff
         run: |
@@ -82,7 +84,6 @@ jobs:
             --format json \
             --compare-to infracost.json \
             --out-file infracost_diff.json \
-            --api-key ${{ secrets.INFRACOST_API_KEY }}
 
       - name: Create Infracost PR Comment
         if: github.event_name == 'pull_request'
