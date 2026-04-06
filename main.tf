@@ -22,9 +22,9 @@ module "logging" {
 module "vnet_diagnostics" {
   source = "./modules/diagnostic_settings"
 
-  resource_name       = module.networking.vnet_name
-  target_resource_id  = module.networking.vnet_id
-  law_id              = module.logging.law_id
+  resource_name      = module.networking.vnet_name
+  target_resource_id = module.networking.vnet_id
+  law_id             = module.logging.law_id
 
   logs    = ["VMProtectionAlerts", "VMInsights", "NetworkSecurityGroupEvent"]
   metrics = ["AllMetrics"]
@@ -32,9 +32,9 @@ module "vnet_diagnostics" {
 module "nsg_diagnostics" {
   source = "./modules/diagnostic_settings"
 
-  resource_name       = module.networking.nsg_name
-  target_resource_id  = module.networking.nsg_id
-  law_id              = module.logging.law_id
+  resource_name      = module.networking.nsg_name
+  target_resource_id = module.networking.nsg_id
+  law_id             = module.logging.law_id
 
   logs = [
     "NetworkSecurityGroupEvent",
@@ -46,9 +46,9 @@ module "nsg_diagnostics" {
 module "storage_diagnostics" {
   source = "./modules/diagnostic_settings"
 
-  resource_name       = module.logging.logs_storage_name
-  target_resource_id  = module.logging.logs_storage_id
-  law_id              = module.logging.law_id
+  resource_name      = module.logging.logs_storage_name
+  target_resource_id = module.logging.logs_storage_id
+  law_id             = module.logging.law_id
 
   logs = [
     "StorageRead",
@@ -61,19 +61,19 @@ module "storage_diagnostics" {
 module "keyvault_diagnostics" {
   source = "./modules/diagnostic_settings"
 
-  resource_name       = module.keyvault.name
-  target_resource_id  = module.keyvault.id
-  law_id              = module.logging.law_id
+  resource_name      = module.keyvault.name
+  target_resource_id = module.keyvault.id
+  law_id             = module.logging.law_id
 
-  logs = ["AuditEvent"]
+  logs    = ["AuditEvent"]
   metrics = ["AllMetrics"]
 }
 module "firewall_diagnostics" {
   source = "./modules/diagnostic_settings"
 
-  resource_name       = module.firewall.name
-  target_resource_id  = module.firewall.id
-  law_id              = module.logging.law_id
+  resource_name      = module.firewall.name
+  target_resource_id = module.firewall.id
+  law_id             = module.logging.law_id
 
   logs = [
     "AzureFirewallApplicationRule",
@@ -86,10 +86,10 @@ module "firewall_diagnostics" {
 module "network_watcher" {
   source = "./modules/network_watcher"
 
-  prefix            = var.prefix
-  location          = var.location
-  rg_networking     = module.resource_groups.networking_name
-  nsg_ids           = module.networking.nsg_ids
+  prefix        = var.prefix
+  location      = var.location
+  rg_networking = module.resource_groups.networking_name
+  nsg_ids       = module.networking.nsg_ids
 
   storage_account_id = module.logging.logs_storage_id
   law_id             = module.logging.law_id
