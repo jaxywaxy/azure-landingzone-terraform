@@ -19,7 +19,7 @@ module "logging" {
   location   = var.location
   rg_logging = module.resource_groups.logging_name
 }
-module "vnet_diagnostics" {
+/* module "vnet_diagnostics" {
   source = "./modules/diagnostic_settings"
 
   resource_name      = module.networking.vnet_name
@@ -29,7 +29,7 @@ module "vnet_diagnostics" {
   logs    = ["VMProtectionAlerts", "VMInsights", "NetworkSecurityGroupEvent"]
   metrics = ["AllMetrics"]
 }
-/* module "nsg_diagnostics" {
+ module "nsg_diagnostics" {
   source = "./modules/diagnostic_settings"
 
   resource_name      = module.networking.nsg_name
@@ -83,7 +83,7 @@ module "firewall_diagnostics" {
 
   metrics = ["AllMetrics"]
 } */
-module "network_watcher" {
+/*module "network_watcher" {
   source = "./modules/network_watcher"
 
   prefix        = var.prefix
@@ -94,5 +94,4 @@ module "network_watcher" {
   storage_account_id = module.logging.logs_storage_id
   law_id             = module.logging.law_id
   law_workspace_id   = module.logging.law_workspace_id
-}
-
+}*/
