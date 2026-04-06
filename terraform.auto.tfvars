@@ -1,2 +1,2 @@
-prefix   = "lz"
-location = "australiaeast"
+prefix     = "lz"
+location   = "australiaeast"
