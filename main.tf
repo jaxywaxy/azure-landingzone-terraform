@@ -83,4 +83,16 @@ module "firewall_diagnostics" {
 
   metrics = ["AllMetrics"]
 }
+module "network_watcher" {
+  source = "./modules/network_watcher"
+
+  prefix            = var.prefix
+  location          = var.location
+  rg_networking     = module.resource_groups.networking_name
+  nsg_ids           = module.networking.nsg_ids
+
+  storage_account_id = module.logging.logs_storage_id
+  law_id             = module.logging.law_id
+  law_workspace_id   = module.logging.law_workspace_id
+}
 
