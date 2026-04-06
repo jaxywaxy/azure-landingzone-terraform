@@ -19,7 +19,6 @@ crash.*.log
 # -------------------------
 # Sensitive variable files
 # -------------------------
-*.tfvars
 *.tfvars.json
 secret.auto.tfvars
 *.auto.tfvars

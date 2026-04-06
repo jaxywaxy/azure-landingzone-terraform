@@ -1,0 +1,3 @@
+prefix      = "lz"
+location    = "australiaeast"
+
