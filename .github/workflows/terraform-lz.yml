@@ -6,6 +6,10 @@ on:
     branches: [ main ]
   pull_request:
 
+permissions: 
+  id-token: write
+  contents: read
+
 concurrency:
   group: terraform
   cancel-in-progress: true
