@@ -1,12 +1,6 @@
 variable "prefix" {
   type = string
 }
-
 variable "location" {
   type = string
 }
-
-variable "rg_logging" {
-  type = string
-}
-

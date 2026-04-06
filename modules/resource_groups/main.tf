@@ -20,3 +20,11 @@ resource "azurerm_resource_group" "apps" {
 output "apps_name" {
   value = azurerm_resource_group.apps.name
 }
+resource "azurerm_resource_group" "logging" {
+  name     = "${var.prefix}-rg-logging"
+  location = var.location
+}
+
+output "logging_name" {
+  value = azurerm_resource_group.logging.name
+}
