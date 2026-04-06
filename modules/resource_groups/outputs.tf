@@ -5,3 +5,6 @@ output "networking_name" {
 output "platform_name" {
   value = azurerm_resource_group.platform.name
 }
+output "logging_name" {
+  value = azurerm_resource_group.logging.name
+}

@@ -29,4 +29,58 @@ module "vnet_diagnostics" {
   logs    = ["VMProtectionAlerts", "VMInsights", "NetworkSecurityGroupEvent"]
   metrics = ["AllMetrics"]
 }
+module "nsg_diagnostics" {
+  source = "./modules/diagnostic_settings"
+
+  resource_name       = module.networking.nsg_name
+  target_resource_id  = module.networking.nsg_id
+  law_id              = module.logging.law_id
+
+  logs = [
+    "NetworkSecurityGroupEvent",
+    "NetworkSecurityGroupRuleCounter"
+  ]
+
+  metrics = ["AllMetrics"]
+}
+module "storage_diagnostics" {
+  source = "./modules/diagnostic_settings"
+
+  resource_name       = module.logging.logs_storage_name
+  target_resource_id  = module.logging.logs_storage_id
+  law_id              = module.logging.law_id
+
+  logs = [
+    "StorageRead",
+    "StorageWrite",
+    "StorageDelete"
+  ]
+
+  metrics = ["AllMetrics"]
+}
+module "keyvault_diagnostics" {
+  source = "./modules/diagnostic_settings"
+
+  resource_name       = module.keyvault.name
+  target_resource_id  = module.keyvault.id
+  law_id              = module.logging.law_id
+
+  logs = ["AuditEvent"]
+  metrics = ["AllMetrics"]
+}
+module "firewall_diagnostics" {
+  source = "./modules/diagnostic_settings"
+
+  resource_name       = module.firewall.name
+  target_resource_id  = module.firewall.id
+  law_id              = module.logging.law_id
+
+  logs = [
+    "AzureFirewallApplicationRule",
+    "AzureFirewallNetworkRule",
+    "AzureFirewallDnsProxy"
+  ]
+
+  metrics = ["AllMetrics"]
+}
 

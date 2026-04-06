@@ -27,4 +27,10 @@ output "law_primary_key" {
   sensitive = true
 }
 
+output "logs_storage_id" {
+  value = azurerm_storage_account.logs.id
+}
 
+output "logs_storage_name" {
+  value = azurerm_storage_account.logs.name
+}
