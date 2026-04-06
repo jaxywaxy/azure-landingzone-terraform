@@ -21,6 +21,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      issues: write
 
     env:
       ARM_USE_OIDC: true
@@ -66,8 +67,6 @@ jobs:
 
       - name: Comment Plan on PR
         if: github.event_name == 'pull_request'
-        permissions:
-          issues: write		
         uses: actions/github-script@v7
         with:
           script: |
