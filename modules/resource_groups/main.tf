@@ -17,14 +17,6 @@ resource "azurerm_resource_group" "apps" {
   location = var.location
 }
 
-output "platform_name" {
-  value = azurerm_resource_group.platform.name
-}
-
-output "networking_name" {
-  value = azurerm_resource_group.networking.name
-}
-
 output "apps_name" {
   value = azurerm_resource_group.apps.name
 }

@@ -1,10 +1,18 @@
 name: Terraform Landing Zone
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [ main ]
   pull_request:
+  workflow_dispatch:
+
+permissions: 
+  id-token: write
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: terraform
+  cancel-in-progress: true
 
 jobs:
   terraform-plan:
@@ -13,6 +21,8 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      issues: write
+      pull-requests: write
 
     env:
       ARM_USE_OIDC: true
@@ -36,11 +46,18 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Debug OIDC Token
+        run: |
+          echo "GITHUB_REF: $GITHUB_REF"
+          echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
+          echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
+          echo "GITHUB_ENVIRONMENT: $GITHUB_ENVIRONMENT"
+
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Format
-        run: terraform fmt -check
+        run: terraform fmt -check -recursive -diff *.tf
 
       - name: Terraform Plan
         run: terraform plan -out=tfplan
