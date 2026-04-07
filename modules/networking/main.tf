@@ -3,6 +3,7 @@ resource "azurerm_virtual_network" "hub" {
   location            = var.location
   resource_group_name = var.rg_network
   address_space       = ["10.0.0.0/16"]
+  tags = var.tags
 }
 
 resource "azurerm_subnet" "hub_firewall" {
@@ -24,6 +25,7 @@ resource "azurerm_virtual_network" "apps" {
   location            = var.location
   resource_group_name = var.rg_network
   address_space       = ["10.1.0.0/16"]
+  tags = var.tags
 }
 
 resource "azurerm_subnet" "apps_web" {

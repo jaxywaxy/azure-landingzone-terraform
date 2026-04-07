@@ -1,16 +1,30 @@
 # ---------------------------------------------------------
 # Terraform core
 # ---------------------------------------------------------
+# ---------------------------------------------------------
+# Terraform core
+# ---------------------------------------------------------
 .terraform/
 .terraform.lock.hcl
 terraform.tfstate
+terraform.tfstate.*
 terraform.tfstate.*
 crash.log
 override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
 
+# ---------------------------------------------------------
+# Terraform environment files
+# ---------------------------------------------------------
+# Allow only env-specific tfvars
+*.tfvars
+!envs/**/terraform.tfvars
 # ---------------------------------------------------------
 # Terraform environment files
 # ---------------------------------------------------------
@@ -35,7 +49,27 @@ modules/**/.terraform/
 modules/**/.terraform.lock.hcl
 modules/**/terraform.tfstate
 modules/**/terraform.tfstate.*
+# Prevent accidental auto-loaded tfvars
+terraform.auto.tfvars
+*.auto.tfvars
 
+# ---------------------------------------------------------
+# Terraform plan files
+# ---------------------------------------------------------
+*.tfplan
+plan.txt
+
+# ---------------------------------------------------------
+# Terraform module hygiene
+# ---------------------------------------------------------
+modules/**/.terraform/
+modules/**/.terraform.lock.hcl
+modules/**/terraform.tfstate
+modules/**/terraform.tfstate.*
+
+# ---------------------------------------------------------
+# OS / Editor junk
+# ---------------------------------------------------------
 # ---------------------------------------------------------
 # OS / Editor junk
 # ---------------------------------------------------------

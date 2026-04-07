@@ -1,22 +1,25 @@
-variable "location" {
-  type = string
-}
-
 resource "azurerm_resource_group" "platform" {
-  name     = "rg-platform"
+  name     = "${var.prefix}-rg-platform"
   location = var.location
+  tags     = var.tags
 }
 
 resource "azurerm_resource_group" "networking" {
-  name     = "rg-networking"
+  name     = "${var.prefix}-rg-networking"
   location = var.location
+  tags     = var.tags
 }
 
 resource "azurerm_resource_group" "apps" {
-  name     = "rg-apps-dev"
+  name     = "${var.prefix}-rg-apps"
   location = var.location
+  tags     = var.tags
 }
 
-output "apps_name" {
-  value = azurerm_resource_group.apps.name
+resource "azurerm_resource_group" "logging" {
+  name     = "${var.prefix}-rg-logging"
+  location = var.location
+  tags     = var.tags
 }
+
+
