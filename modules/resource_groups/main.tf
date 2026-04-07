@@ -1,13 +1,4 @@
 resource "azurerm_resource_group" "platform" {
-  name     = "rg-platform"
-  location = var.location
-}
-
-resource "azurerm_resource_group" "networking" {
-  name     = "rg-networking"
-  location = var.location
-}
-resource "azurerm_resource_group" "platform" {
   name     = "${var.prefix}-rg-platform"
   location = var.location
   tags     = var.tags
