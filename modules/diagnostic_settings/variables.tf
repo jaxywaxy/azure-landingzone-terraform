@@ -14,12 +14,11 @@ variable "logs" {
   type    = list(string)
   default = []
 }
-
-variable "metrics" {
-  type    = list(string)
-  default = []
-}
 variable "tags" {
   type    = map(string)
   default = {}
+}
+variable "metrics" {
+  type    = list(string)
+  default = []
 }
