@@ -4,3 +4,10 @@ variable "prefix" {
 variable "location" {
   type = string
 }
+variable "tags" {
+  type = map(string)
+  default = {}
+}
+variable "rg_logging" {
+  type = string
+}

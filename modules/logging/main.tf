@@ -12,6 +12,7 @@ resource "azurerm_storage_account" "logs" {
   location                 = var.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  tags                     = var.tags
 }
 
 output "law_id" {
