@@ -4,6 +4,7 @@ module "resource_groups" {
   source   = "./modules/resource_groups"
   prefix   = var.prefix
   location = var.location
+  tags     = var.tags
 }
 
 module "networking" {
@@ -11,13 +12,16 @@ module "networking" {
   prefix     = var.prefix
   location   = var.location
   rg_network = module.resource_groups.networking_name
+  tags       = var.tags
 }
+
 
 module "logging" {
   source     = "./modules/logging"
   prefix     = var.prefix
   location   = var.location
   rg_logging = module.resource_groups.logging_name
+  tags       = var.tags
 }
 /* module "vnet_diagnostics" {
   source = "./modules/diagnostic_settings"

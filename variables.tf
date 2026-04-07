@@ -8,4 +8,7 @@ variable "location" {
   description = "Azure region for deployment"
   default     = "australiaeast"
 }
+variable "tags" {
+  type = map(string)
+}
 
