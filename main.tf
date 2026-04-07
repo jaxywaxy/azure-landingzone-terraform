@@ -1,10 +1,10 @@
 data "azurerm_client_config" "current" {}
 
 module "resource_groups" {
-  source     = "./modules/resource_groups"
-  prefix     = var.prefix
-  location   = var.location
-  tags       = var.tags
+  source   = "./modules/resource_groups"
+  prefix   = var.prefix
+  location = var.location
+  tags     = var.tags
 }
 
 module "networking" {
