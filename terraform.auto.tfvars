@@ -1,2 +1,0 @@
-prefix   = "lz"
-location = "australiaeast"
