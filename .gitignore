@@ -1,43 +1,53 @@
-# -------------------------
-# Terraform directories
-# -------------------------
+# ---------------------------------------------------------
+# Terraform core
+# ---------------------------------------------------------
 .terraform/
 .terraform.lock.hcl
-
-# -------------------------
-# Terraform state files
-# -------------------------
 terraform.tfstate
-terraform.tfstate.backup
-*.tfstate
-*.tfstate.backup
-
-# Crash logs
+terraform.tfstate.*
 crash.log
-crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
 
-# -------------------------
-# Local environment files
-# -------------------------
-.env
-*.env
+# ---------------------------------------------------------
+# Terraform environment files
+# ---------------------------------------------------------
+# Allow only env-specific tfvars
+*.tfvars
+!envs/**/terraform.tfvars
 
-# -------------------------
-# IDE / Editor junk
-# -------------------------
-.vscode/
-.idea/
-*.swp
-*.swo
+# Prevent accidental auto-loaded tfvars
+terraform.auto.tfvars
+*.auto.tfvars
 
-# -------------------------
-# OS-specific junk
-# -------------------------
+# ---------------------------------------------------------
+# Terraform plan files
+# ---------------------------------------------------------
+*.tfplan
+plan.txt
+
+# ---------------------------------------------------------
+# Terraform module hygiene
+# ---------------------------------------------------------
+modules/**/.terraform/
+modules/**/.terraform.lock.hcl
+modules/**/terraform.tfstate
+modules/**/terraform.tfstate.*
+
+# ---------------------------------------------------------
+# OS / Editor junk
+# ---------------------------------------------------------
 .DS_Store
 Thumbs.db
 
-# -------------------------
-# Python virtual env (if used)
-venv/
-.env/
+# VS Code
+.vscode/
+.history/
 
+# ---------------------------------------------------------
+# Logs / temp
+# ---------------------------------------------------------
+*.log
+*.tmp

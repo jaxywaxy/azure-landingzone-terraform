@@ -9,3 +9,7 @@ variable "location" {
 variable "rg_network" {
   type = string
 }
+variable "tags" {
+  type    = map(string)
+  default = {}
+}
