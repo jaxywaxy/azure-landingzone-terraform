@@ -16,7 +16,7 @@ resource "azurerm_storage_account" "logs" {
   blob_properties {
   versioning_enabled            = false
   change_feed_enabled           = false
-  last_access_time_enabled      = true
+  last_access_time_enabled      = false
 }
 
   tags = var.tags
