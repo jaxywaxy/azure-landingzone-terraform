@@ -22,6 +22,11 @@ resource "azurerm_storage_account" "logs" {
   tags = var.tags
 }
 
+resource "azurerm_storage_container" "logs" {
+  name                  = "logs"
+  storage_account_name  = azurerm_storage_account.logs.name
+  container_access_type = "private"
+}
 output "law_id" {
   value = azurerm_log_analytics_workspace.law.id
 }
