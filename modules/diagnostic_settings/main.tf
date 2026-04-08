@@ -1,4 +1,4 @@
-data "azurerm_resources" "target" {
+data "azurerm_resource" "target" {
   id = var.target_resource_id
 }
 
