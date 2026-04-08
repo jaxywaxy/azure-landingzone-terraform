@@ -2,6 +2,10 @@ variable "resource_name" {
   type        = string
   description = "Name of the resource for naming the diagnostic setting."
 }
+variable "resource_type" {
+  type        = string
+  description = "Azure resource type (e.g., Microsoft.Storage/storageAccounts)."
+}
 
 variable "target_resource_id" {
   type        = string

@@ -1,10 +1,5 @@
-data "azurerm_resource" "target" {
-  id = var.target_resource_id
-}
 
 locals {
-  # Extract resource type dynamically
-  resource_type = data.azurerm_resource.target.type
 
   # Supported logs per resource type
   storage_supported_logs = [
