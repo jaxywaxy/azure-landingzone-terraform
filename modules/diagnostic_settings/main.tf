@@ -4,12 +4,10 @@ locals {
   # Supported logs per resource type
   storage_supported_logs = [
     "StorageWrite",
-    "StorageDelete",
     "BlobRead",
     "BlobWrite",
     "BlobDelete",
-    "BlobTierChange",
-    "StorageLifecycleManagement"
+    "BlobTierChange"
   ]
 
   keyvault_supported_logs = [
