@@ -45,19 +45,11 @@ module "storage_diagnostics" {
   source = "../../modules/diagnostic_settings"
 
   resource_name      = module.logging.logs_storage_name
+  resource_type      = "Microsoft.Storage/storageAccounts"
   target_resource_id = module.logging.logs_storage_id
   law_id             = module.logging.law_id
 
-  logs = [
-   "StorageRead",
-   "StorageWrite",
-   "BlobRead",
-   "BlobWrite",
-   "BlobDelete",
-   "BlobTierChange",
-   "StorageLifecycleManagement"
- ]
-
+  logs = []
   metrics = [
    "Transaction",
    "Capacity"
