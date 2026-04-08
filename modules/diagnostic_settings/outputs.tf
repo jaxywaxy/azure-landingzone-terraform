@@ -9,8 +9,7 @@ output "applied_logs" {
 output "applied_metrics" {
   value = local.filtered_metrics
 }
-
-output "detected_resource_type" {
-  value = local.resource_type
+output "resource_type" {
+  value = var.resource_type
 }
 

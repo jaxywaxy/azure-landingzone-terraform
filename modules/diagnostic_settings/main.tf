@@ -29,12 +29,13 @@ locals {
 
   # Resource-type-aware selection using regex
   supported_logs = (
-    can(regex("Microsoft\\.Storage", local.resource_type)) ? local.storage_supported_logs :
-    can(regex("Microsoft\\.KeyVault", local.resource_type)) ? local.keyvault_supported_logs :
-    can(regex("Microsoft\\.Network/networkSecurityGroups", local.resource_type)) ? local.nsg_supported_logs :
-    can(regex("Microsoft\\.Network/virtualNetworks", local.resource_type)) ? local.vnet_supported_logs :
-    var.logs # fallback
-  )
+    can(regex("Microsoft\\.Storage", var.resource_type)) ? local.storage_supported_logs :
+    can(regex("Microsoft\\.KeyVault", var.resource_type)) ? local.keyvault_supported_logs :
+    can(regex("Microsoft\\.Network/networkSecurityGroups", var.resource_type)) ? local.nsg_supported_logs :
+    can(regex("Microsoft\\.Network/virtualNetworks", var.resource_type)) ? local.vnet_supported_logs :
+  var.logs
+)
+
 
   # Filter logs to only those supported
   filtered_logs = [
