@@ -23,7 +23,7 @@ resource "azurerm_storage_account" "logs" {
 
 resource "azurerm_storage_container" "logs" {
   name                  = "logs"
-  storage_account_name  = azurerm_storage_account.logs.name
+  storage_account_id    = azurerm_storage_account.logs.id
   container_access_type = "private"
 }
 output "law_id" {
