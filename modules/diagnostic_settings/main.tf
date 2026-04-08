@@ -3,7 +3,6 @@ locals {
 
   # Supported logs per resource type
   storage_supported_logs = [
-    "StorageWrite",
     "BlobRead",
     "BlobWrite",
     "BlobDelete",

@@ -49,7 +49,6 @@ module "storage_diagnostics" {
   law_id             = module.logging.law_id
 
   logs = [
-    "StorageWrite",
     "BlobRead",
     "BlobWrite",
     "BlobDelete",
