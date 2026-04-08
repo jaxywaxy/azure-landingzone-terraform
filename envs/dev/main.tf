@@ -45,7 +45,6 @@ module "storage_diagnostics" {
 
   resource_name      = module.logging.logs_storage_name
   target_resource_id = module.logging.logs_storage_id
-  resource_type      = "Microsoft.Storage/storageAccounts"
   law_id             = module.logging.law_id
 
   logs = [
@@ -63,3 +62,4 @@ module "storage_diagnostics" {
     "Capacity"
   ]
 }
+

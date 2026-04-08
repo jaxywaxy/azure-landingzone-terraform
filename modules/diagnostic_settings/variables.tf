@@ -8,11 +8,6 @@ variable "target_resource_id" {
   description = "Resource ID of the target resource."
 }
 
-variable "resource_type" {
-  type        = string
-  description = "Azure resource type (e.g., Microsoft.Storage/storageAccounts)."
-}
-
 variable "law_id" {
   type        = string
   description = "Log Analytics Workspace ID."
@@ -32,16 +27,13 @@ variable "metrics" {
 
 variable "retention_enabled" {
   type        = bool
-  description = "Enable retention policy for logs and metrics."
   default     = false
 }
 
 variable "retention_days" {
   type        = number
-  description = "Retention period in days."
   default     = 30
 }
-
 
 variable "eventhub_name" {
   type        = string
