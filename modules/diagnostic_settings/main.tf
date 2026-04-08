@@ -3,11 +3,10 @@ resource "azurerm_monitor_diagnostic_setting" "ds" {
   target_resource_id         = var.target_resource_id
   log_analytics_workspace_id = var.law_id
 
-  dynamic "log" {
+  dynamic "enabled_log" {
     for_each = var.logs
     content {
-      category = log.value
-      enabled  = true
+      category = enabled_log.value
     }
   }
 

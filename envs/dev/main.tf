@@ -47,6 +47,19 @@ module "storage_diagnostics" {
   target_resource_id = module.logging.logs_storage_id
   law_id             = module.logging.law_id
 
-  logs    = ["StorageRead", "StorageWrite", "StorageDelete"]
-  metrics = ["AllMetrics"]
+  logs = [
+   "StorageRead",
+   "StorageWrite",
+   "BlobRead",
+   "BlobWrite",
+   "BlobDelete",
+   "BlobTierChange",
+   "StorageLifecycleManagement"
+ ]
+
+  metrics = [
+   "Transaction",
+   "Capacity"
+ ]
+
 }
