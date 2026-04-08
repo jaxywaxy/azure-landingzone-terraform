@@ -1,17 +1,20 @@
 terraform {
   required_version = ">= 1.6.0"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.100"   # or latest stable
+    }
+  }
 
   backend "azurerm" {
-    resource_group_name  = "tfstate-rg"
-    storage_account_name = "tfstatejacqui"
+    resource_group_name  = "rg-tfstate"
+    storage_account_name = "sttfstate18396"
     container_name       = "tfstate"
     key                  = "test.tfstate"
   }
 }
 
-provider "azurerm" {
-  features {}
-}
 
 data "azurerm_client_config" "current" {}
 
@@ -42,9 +45,13 @@ module "storage_diagnostics" {
   source = "../../modules/diagnostic_settings"
 
   resource_name      = module.logging.logs_storage_name
+  resource_type      = "Microsoft.Storage/storageAccounts"
   target_resource_id = module.logging.logs_storage_id
   law_id             = module.logging.law_id
 
-  logs    = ["StorageRead", "StorageWrite", "StorageDelete"]
-  metrics = ["AllMetrics"]
+  logs = []
+  metrics = [
+   "Transaction",
+   "Capacity"
+ ]
 }

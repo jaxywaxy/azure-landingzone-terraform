@@ -1,4 +1,4 @@
-prefix   = "jacqui-prod"
+prefix   = "jacquiprod"
 location = "australiaeast"
 
 tags = {
