@@ -48,14 +48,7 @@ module "storage_diagnostics" {
   target_resource_id = module.logging.logs_storage_id
   law_id             = module.logging.law_id
 
-  logs = [
-    "BlobRead",
-    "BlobWrite",
-    "BlobDelete",
-    "BlobTierChange"
- ]
-
-
+  logs = []
   metrics = [
     "Transaction",
     "Capacity"
