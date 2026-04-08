@@ -1,4 +1,4 @@
-data "azurerm_resource" "target" {
+data "azurerm_resources" "target" {
   id = var.target_resource_id
 }
 
@@ -64,11 +64,6 @@ resource "azurerm_monitor_diagnostic_setting" "ds" {
     for_each = local.filtered_logs
     content {
       category = enabled_log.value
-
-      retention_policy {
-        enabled = var.retention_enabled
-        days    = var.retention_days
-      }
     }
   }
 
@@ -78,11 +73,6 @@ resource "azurerm_monitor_diagnostic_setting" "ds" {
     content {
       category = metric.value
       enabled  = true
-
-      retention_policy {
-        enabled = var.retention_enabled
-        days    = var.retention_days
-      }
     }
   }
 
