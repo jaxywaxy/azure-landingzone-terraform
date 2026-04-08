@@ -10,7 +10,7 @@ resource "azurerm_storage_account" "logs" {
   name                     = "${var.prefix}logstore"
   resource_group_name      = var.rg_logging
   location                 = var.location
-  account_kind             = "StorageV2"   # 🔥 REQUIRED for diagnostics
+  account_kind             = "StorageV2"   
   account_tier             = "Standard"
   account_replication_type = "LRS"
   tags = var.tags
