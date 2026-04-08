@@ -18,8 +18,3 @@ output "logs_storage_id" {
   description = "Resource ID of the storage account used for logs."
   value       = azurerm_storage_account.logs.id
 }
-
-output "logs_storage_name" {
-  description = "Name of the storage account used for logs."
-  value       = azurerm_storage_account.logs.name
-}
