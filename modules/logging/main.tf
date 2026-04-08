@@ -12,13 +12,12 @@ resource "azurerm_storage_account" "logs" {
   location                 = var.location
   account_kind             = "StorageV2"   
   account_tier             = "Standard"
-  account_replication_type = "LRS" 
+  account_replication_type = "LRS"
   blob_properties {
   versioning_enabled            = false
   change_feed_enabled           = false
   last_access_time_enabled      = false
 }
-
   tags = var.tags
 }
 
