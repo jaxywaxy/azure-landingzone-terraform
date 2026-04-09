@@ -1,11 +1,5 @@
 terraform {
   required_version = ">= 1.6.0"
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.100"   # or latest stable
-    }
-  }
 
   backend "azurerm" {
     resource_group_name  = "rg-tfstate"
@@ -49,7 +43,6 @@ module "networking" {
   rg_network = module.resource_groups.networking_name
   tags       = module.tags.tags
 }
-
 # -------------------------------
 # LOGGING
 # -------------------------------
