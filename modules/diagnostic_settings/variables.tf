@@ -53,13 +53,3 @@ variable "archive_storage_id" {
   type        = string
   default     = null
 }
-
-variable "eventhub_name" {
-  type    = string
-  default = null
-}
-
-variable "eventhub_auth_rule_id" {
-  type    = string
-  default = null
-}
