@@ -70,3 +70,13 @@ resource "azurerm_monitor_diagnostic_setting" "ds" {
   eventhub_authorization_rule_id   = var.eventhub_auth_rule_id
   storage_account_id               = var.archive_storage_id
 }
+module "storage_diagnostics" {
+  source             = "../../modules/diagnostic_settings"
+  resource_name      = module.logging.logs_storage_name
+  resource_type      = "Microsoft.Storage/storageAccounts"
+  target_resource_id = module.logging.logs_storage_id
+  law_id             = module.logging.law_id
+  logs               = ["StorageRead", "StorageWrite"]
+  metrics            = ["Transaction"]
+  tags               = module.tags.tags
+}

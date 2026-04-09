@@ -56,3 +56,10 @@ variable "archive_storage_id" {
   type        = string
   default     = null
 }
+variable "global_tags" {
+  type = map(string)
+}
+
+variable "environment_tags" {
+  type = map(string)
+}

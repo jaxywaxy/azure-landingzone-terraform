@@ -48,3 +48,12 @@ module "storage_diagnostics" {
   ]
 
 }
+module "tags" {
+  source = "../../modules/tags"
+
+  environment       = "dev"
+  global_tags       = var.global_tags
+  environment_tags  = var.environment_tags
+  resource_tags     = {}
+}
+

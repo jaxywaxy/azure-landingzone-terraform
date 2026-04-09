@@ -21,5 +21,11 @@ resource "azurerm_resource_group" "logging" {
   location = var.location
   tags     = var.tags
 }
+module "resource_groups" {
+  source   = "../../modules/resource_groups"
+  prefix   = var.prefix
+  location = var.location
+  tags     = module.tags.tags
+}
 
 

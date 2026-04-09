@@ -55,3 +55,11 @@ module "storage_diagnostics" {
    "Capacity"
  ]
 }
+module "tags" {
+  source = "../../modules/tags"
+
+  environment       = "test"
+  global_tags       = var.global_tags
+  environment_tags  = var.environment_tags
+  resource_tags     = {}
+}

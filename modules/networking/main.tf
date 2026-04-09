@@ -34,6 +34,12 @@ resource "azurerm_subnet" "apps_web" {
   virtual_network_name = azurerm_virtual_network.apps.name
   address_prefixes     = ["10.1.1.0/24"]
 }
+module "networking" {
+  source   = "../../modules/networking"
+  prefix   = var.prefix
+  location = var.location
+  tags     = module.tags.tags
+}
 
 resource "azurerm_subnet" "apps_app" {
   name                 = "snet-app"
