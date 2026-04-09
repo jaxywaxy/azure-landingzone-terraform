@@ -7,10 +7,10 @@ resource "azurerm_network_watcher" "nw" {
 resource "azurerm_network_watcher_flow_log" "flow" {
   for_each = var.nsg_ids
 
-  name                 = "${each.key}-flowlog"
-  network_watcher_name = azurerm_network_watcher.nw.name
-  resource_group_name  = var.rg_networking
-  target_resource_id   = each.value
+  name                      = "${each.key}-flowlog"
+  network_watcher_name      = azurerm_network_watcher.nw.name
+  resource_group_name       = var.rg_networking
+  network_security_group_id = each.value
 
   storage_account_id = var.storage_account_id
   enabled            = true
