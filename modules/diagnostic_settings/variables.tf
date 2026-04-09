@@ -19,13 +19,13 @@ variable "law_id" {
 }
 
 variable "logs" {
-  type        = list(string)
-  default     = []
+  type    = list(string)
+  default = []
 }
 
 variable "metrics" {
-  type        = list(string)
-  default     = []
+  type    = list(string)
+  default = []
 }
 
 variable "eventhub_name" {
