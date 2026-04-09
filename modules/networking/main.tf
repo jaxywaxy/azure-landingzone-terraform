@@ -34,13 +34,6 @@ resource "azurerm_subnet" "apps_web" {
   virtual_network_name = azurerm_virtual_network.apps.name
   address_prefixes     = ["10.1.1.0/24"]
 }
-module "networking" {
-  source   = "../../modules/networking"
-  prefix   = var.prefix
-  location = var.location
-  tags     = module.tags.tags
-}
-
 resource "azurerm_subnet" "apps_app" {
   name                 = "snet-app"
   resource_group_name  = var.rg_network
@@ -63,7 +56,6 @@ resource "azurerm_virtual_network_peering" "hub_to_apps" {
   allow_forwarded_traffic   = true
   allow_gateway_transit     = false
 }
-
 resource "azurerm_virtual_network_peering" "apps_to_hub" {
   name                      = "apps-to-hub"
   resource_group_name       = var.rg_network

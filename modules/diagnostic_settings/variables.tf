@@ -6,40 +6,23 @@ variable "resource_type" {
   type        = string
   description = "Azure resource type (e.g., Microsoft.Storage/storageAccounts)."
 }
-
 variable "target_resource_id" {
   type        = string
   description = "Resource ID of the target resource."
 }
-
 variable "law_id" {
   type        = string
   description = "Log Analytics Workspace ID."
 }
-
 variable "logs" {
   type        = list(string)
   description = "Requested log categories."
   default     = []
 }
-variable "tags" {
-  type    = map(string)
-  default = {}
-}
 variable "metrics" {
   type        = list(string)
   description = "Requested metric categories."
   default     = []
-}
-
-variable "retention_enabled" {
-  type        = bool
-  default     = false
-}
-
-variable "retention_days" {
-  type        = number
-  default     = 30
 }
 
 variable "eventhub_name" {
@@ -55,11 +38,4 @@ variable "eventhub_auth_rule_id" {
 variable "archive_storage_id" {
   type        = string
   default     = null
-}
-variable "global_tags" {
-  type = map(string)
-}
-
-variable "environment_tags" {
-  type = map(string)
 }

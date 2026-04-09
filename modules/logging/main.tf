@@ -51,11 +51,3 @@ resource "azurerm_storage_container" "logs" {
   storage_account_name  = azurerm_storage_account.logs.name
   container_access_type = "private"
 }
-
-module "logging" {
-  source     = "../../modules/logging"
-  prefix     = var.prefix
-  location   = var.location
-  rg_logging = module.resource_groups.logging_name
-  tags       = module.tags.tags
-}
