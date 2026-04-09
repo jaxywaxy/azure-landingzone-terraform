@@ -50,10 +50,14 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Terraform Init
-        run: terraform init
+        run: |
+          cd envs/dev
+          terraform init -reconfigure
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
+        run: |
+          cd envs/dev
+          terraform plan -out=tfplan
 
       - name: Export Plan to Text
         run: terraform show -no-color tfplan > plan.txt
