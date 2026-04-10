@@ -49,14 +49,10 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Terraform Init
-        run: |
-         cd ${GITHUB_WORKSPACE}/envs/dev
-         terraform init -reconfigure
+        run: terraform init -reconfigure 
 
       - name: Terraform Plan
-        run: |
-          cd ${GITHUB_WORKSPACE}/envs/dev
-          terraform plan -out=tfplan
+        run: terraform plan -out=tfplan 
 
       - name: Export Plan to Text
         run: |
