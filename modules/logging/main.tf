@@ -5,12 +5,14 @@ resource "azurerm_log_analytics_workspace" "law" {
   sku                 = "PerGB2018"
   retention_in_days   = 30
   tags                = var.tags
+  tags                = var.tags
 }
 
 resource "azurerm_storage_account" "logs" {
   name                     = "${var.prefix}logstore"
   resource_group_name      = var.rg_logging
   location                 = var.location
+  account_kind             = "StorageV2"
   account_kind             = "StorageV2"
   account_tier             = "Standard"
   account_replication_type = "LRS"

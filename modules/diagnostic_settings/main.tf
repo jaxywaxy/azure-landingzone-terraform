@@ -56,19 +56,30 @@ resource "azurerm_monitor_diagnostic_setting" "ds" {
   # Logs
   dynamic "enabled_log" {
     for_each = local.filtered_logs
+  # Logs
+  dynamic "enabled_log" {
+    for_each = local.filtered_logs
     content {
+      category = enabled_log.value
       category = enabled_log.value
     }
   }
 
   # Metrics
+  # Metrics
   dynamic "metric" {
+    for_each = local.filtered_metrics
     for_each = local.filtered_metrics
     content {
       category = metric.value
       enabled  = true
     }
   }
+
+  # Optional sinks
+  eventhub_name                    = var.eventhub_name
+  eventhub_authorization_rule_id   = var.eventhub_auth_rule_id
+  storage_account_id               = var.archive_storage_id
 
   # Optional sinks
   eventhub_name                    = var.eventhub_name
