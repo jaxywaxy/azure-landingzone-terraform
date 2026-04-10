@@ -1,0 +1,286 @@
+name: Destroy Environment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to destroy (dev, test, prod, all)"
+        required: true
+        type: choice
+        options:
+          - dev
+          - test
+          - prod
+          - all
+
+      mode:
+        description: "Destroy mode: dry-run (plan only) or destroy"
+        required: true
+        type: choice
+        options:
+          - dry-run
+          - destroy
+
+      confirmation:
+        description: "Type DESTROY-<env> to confirm (e.g., DESTROY-dev, DESTROY-all)"
+        required: true
+        type: string
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+
+  # ============================================================
+  # SINGLE ENVIRONMENT DESTROY
+  # ============================================================
+  destroy-single:
+    if: ${{ github.event.inputs.environment != 'all' }}
+    name: Destroy ${{ github.event.inputs.environment }}
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    env:
+      ARM_USE_OIDC: true
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    defaults:
+      run:
+        working-directory: envs/${{ github.event.inputs.environment }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 🔥 Confirmation Prompt
+      - name: Validate Confirmation
+        run: |
+          EXPECTED="DESTROY-${{ github.event.inputs.environment }}"
+          if [ "${{ github.event.inputs.confirmation }}" != "$EXPECTED" ]; then
+            echo "❌ Confirmation string does not match. Expected: $EXPECTED"
+            exit 1
+          fi
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Terraform Init
+        run: terraform init
+
+      # 🔥 Backup state before destroy
+      - name: Backup Terraform State
+        run: terraform state pull > state-backup.json
+
+      - name: Upload State Backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-state-${{ github.event.inputs.environment }}
+          path: envs/${{ github.event.inputs.environment }}/state-backup.json
+
+      # 🔥 Dry-run mode
+      - name: Terraform Plan Destroy (Dry Run)
+        if: ${{ github.event.inputs.mode == 'dry-run' }}
+        run: terraform plan -destroy
+
+      # 🔥 Actual destroy
+      - name: Terraform Destroy
+        if: ${{ github.event.inputs.mode == 'destroy' }}
+        run: terraform destroy -auto-approve
+
+
+  # ============================================================
+  # DESTROY ALL (dev → test → prod)
+  # ============================================================
+
+  destroy-all-dev:
+    if: ${{ github.event.inputs.environment == 'all' }}
+    name: Destroy DEV
+    runs-on: ubuntu-latest
+    environment: dev
+
+    env:
+      ARM_USE_OIDC: true
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    defaults:
+      run:
+        working-directory: envs/dev
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 🔥 Confirmation Prompt
+      - name: Validate Confirmation
+        run: |
+          EXPECTED="DESTROY-all"
+          if [ "${{ github.event.inputs.confirmation }}" != "$EXPECTED" ]; then
+            echo "❌ Confirmation string does not match. Expected: $EXPECTED"
+            exit 1
+          fi
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - run: terraform init
+
+      - name: Backup State
+        run: terraform state pull > state-backup.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: terraform-state-dev
+          path: envs/dev/state-backup.json
+
+      - name: Dry Run Destroy
+        if: ${{ github.event.inputs.mode == 'dry-run' }}
+        run: terraform plan -destroy
+
+      - name: Destroy
+        if: ${{ github.event.inputs.mode == 'destroy' }}
+        run: terraform destroy -auto-approve
+
+
+  destroy-all-test:
+    if: ${{ github.event.inputs.environment == 'all' }}
+    name: Destroy TEST
+    runs-on: ubuntu-latest
+    needs: destroy-all-dev
+    environment: test
+
+    env:
+      ARM_USE_OIDC: true
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    defaults:
+      run:
+        working-directory: envs/test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 🔥 Confirmation Prompt
+      - name: Validate Confirmation
+        run: |
+          EXPECTED="DESTROY-all"
+          if [ "${{ github.event.inputs.confirmation }}" != "$EXPECTED" ]; then
+            echo "❌ Confirmation string does not match. Expected: $EXPECTED"
+            exit 1
+          fi
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - run: terraform init
+
+      - name: Backup State
+        run: terraform state pull > state-backup.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: terraform-state-test
+          path: envs/test/state-backup.json
+
+      - name: Dry Run Destroy
+        if: ${{ github.event.inputs.mode == 'dry-run' }}
+        run: terraform plan -destroy
+
+      - name: Destroy
+        if: ${{ github.event.inputs.mode == 'destroy' }}
+        run: terraform destroy -auto-approve
+
+
+  destroy-all-prod:
+    if: ${{ github.event.inputs.environment == 'all' }}
+    name: Destroy PROD
+    runs-on: ubuntu-latest
+    needs: destroy-all-test
+    environment: prod
+
+    env:
+      ARM_USE_OIDC: true
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    defaults:
+      run:
+        working-directory: envs/prod
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 🔥 Confirmation Prompt
+      - name: Validate Confirmation
+        run: |
+          EXPECTED="DESTROY-all"
+          if [ "${{ github.event.inputs.confirmation }}" != "$EXPECTED" ]; then
+            echo "❌ Confirmation string does not match. Expected: $EXPECTED"
+            exit 1
+          fi
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - run: terraform init
+
+      - name: Backup State
+        run: terraform state pull > state-backup.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: terraform-state-prod
+          path: envs/prod/state-backup.json
+
+      - name: Dry Run Destroy
+        if: ${{ github.event.inputs.mode == 'dry-run' }}
+        run: terraform plan -destroy
+
+      - name: Destroy
+        if: ${{ github.event.inputs.mode == 'destroy' }}
+        run: terraform destroy -auto-approve

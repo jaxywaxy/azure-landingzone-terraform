@@ -3,7 +3,7 @@ resource "azurerm_virtual_network" "hub" {
   location            = var.location
   resource_group_name = var.rg_network
   address_space       = ["10.0.0.0/16"]
-  tags = var.tags
+  tags                = var.tags
 }
 
 resource "azurerm_subnet" "hub_firewall" {
@@ -25,7 +25,7 @@ resource "azurerm_virtual_network" "apps" {
   location            = var.location
   resource_group_name = var.rg_network
   address_space       = ["10.1.0.0/16"]
-  tags = var.tags
+  tags                = var.tags
 }
 
 resource "azurerm_subnet" "apps_web" {
@@ -34,7 +34,6 @@ resource "azurerm_subnet" "apps_web" {
   virtual_network_name = azurerm_virtual_network.apps.name
   address_prefixes     = ["10.1.1.0/24"]
 }
-
 resource "azurerm_subnet" "apps_app" {
   name                 = "snet-app"
   resource_group_name  = var.rg_network
@@ -57,7 +56,6 @@ resource "azurerm_virtual_network_peering" "hub_to_apps" {
   allow_forwarded_traffic   = true
   allow_gateway_transit     = false
 }
-
 resource "azurerm_virtual_network_peering" "apps_to_hub" {
   name                      = "apps-to-hub"
   resource_group_name       = var.rg_network

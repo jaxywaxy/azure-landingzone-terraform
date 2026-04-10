@@ -21,5 +21,3 @@ resource "azurerm_resource_group" "logging" {
   location = var.location
   tags     = var.tags
 }
-
-

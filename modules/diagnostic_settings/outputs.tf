@@ -1,15 +1,19 @@
 output "diagnostic_setting_id" {
-  value = azurerm_monitor_diagnostic_setting.ds.id
+  description = "ID of the diagnostic setting."
+  value       = try(azurerm_monitor_diagnostic_setting.ds[0].id, null)
 }
 
 output "applied_logs" {
-  value = local.filtered_logs
+  description = "Logs that were actually applied after filtering."
+  value       = local.filtered_logs
 }
 
 output "applied_metrics" {
-  value = local.filtered_metrics
-}
-output "resource_type" {
-  value = var.resource_type
+  description = "Metrics that were actually applied after filtering."
+  value       = local.filtered_metrics
 }
 
+output "resource_type" {
+  description = "Resource type used for filtering."
+  value       = var.resource_type
+}
