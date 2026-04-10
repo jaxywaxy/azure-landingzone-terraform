@@ -1,6 +1,6 @@
 output "diagnostic_setting_id" {
   description = "ID of the diagnostic setting."
-  value       = azurerm_monitor_diagnostic_setting.ds.id
+  value       = try(azurerm_monitor_diagnostic_setting.ds[0].id, null)
 }
 
 output "applied_logs" {
