@@ -9,3 +9,10 @@ variable "location" {
 variable "tags" {
   type = map(string)
 }
+variable "global_tags" {
+  type = map(string)
+}
+
+variable "environment_tags" {
+  type = map(string)
+}
