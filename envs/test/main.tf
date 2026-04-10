@@ -15,6 +15,7 @@ terraform {
   }
 }
 
+
 data "azurerm_client_config" "current" {}
 
 # -------------------------------
@@ -71,6 +72,9 @@ module "storage_diagnostics" {
   target_resource_id = module.logging.logs_storage_id
   law_id             = module.logging.law_id
 
-  logs    = [] # Storage has no log categories in the new API
-  metrics = ["Transaction", "Capacity"]
+  logs = []
+  metrics = [
+   "Transaction",
+   "Capacity"
+ ]
 }

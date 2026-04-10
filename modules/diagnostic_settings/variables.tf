@@ -19,8 +19,9 @@ variable "law_id" {
 }
 
 variable "logs" {
-  type    = list(string)
-  default = []
+  type        = list(string)
+  description = "Requested log categories."
+  default     = []
 }
 
 variable "metrics" {

@@ -1,5 +1,11 @@
 terraform {
   required_version = ">= 1.6.0"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.100"   # or latest stable
+    }
+  }
 
   backend "azurerm" {
     resource_group_name  = "rg-tfstate"
@@ -8,6 +14,7 @@ terraform {
     key                  = "prod.tfstate"
   }
 }
+
 
 data "azurerm_client_config" "current" {}
 
@@ -64,6 +71,9 @@ module "storage_diagnostics" {
   target_resource_id = module.logging.logs_storage_id
   law_id             = module.logging.law_id
 
-  logs    = [] # Storage has no log categories in the new API
-  metrics = ["Transaction", "Capacity"]
+  logs = []
+  metrics = [
+   "Transaction",
+   "Capacity"
+ ]
 }

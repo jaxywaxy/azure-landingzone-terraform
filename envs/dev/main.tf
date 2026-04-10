@@ -65,12 +65,16 @@ module "logging" {
 # DIAGNOSTIC SETTINGS
 # -------------------------------
 module "storage_diagnostics" {
-  source             = "../../modules/diagnostic_settings"
+  source = "../../modules/diagnostic_settings"
   resource_name      = module.logging.logs_storage_name
   resource_type      = "Microsoft.Storage/storageAccounts"
   target_resource_id = module.logging.logs_storage_id
   law_id             = module.logging.law_id
 
-  logs    = [] # Storage has no log categories
-  metrics = ["Transaction", "Capacity"]
+  logs    = []
+  metrics = [
+    "Transaction",
+    "Capacity"
+  ]
 }
+

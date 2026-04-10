@@ -19,12 +19,13 @@ locals {
 
   # Resource-type-aware selection using regex
   supported_logs = (
-    can(regex("^Microsoft\\.Storage", var.resource_type)) ? local.storage_supported_logs :
-    can(regex("^Microsoft\\.KeyVault", var.resource_type)) ? local.keyvault_supported_logs :
-    can(regex("^Microsoft\\.Network/networkSecurityGroups", var.resource_type)) ? local.nsg_supported_logs :
-    can(regex("^Microsoft\\.Network/virtualNetworks", var.resource_type)) ? local.vnet_supported_logs :
-    var.logs
-  )
+    can(regex("Microsoft\\.Storage", var.resource_type)) ? local.storage_supported_logs :
+    can(regex("Microsoft\\.KeyVault", var.resource_type)) ? local.keyvault_supported_logs :
+    can(regex("Microsoft\\.Network/networkSecurityGroups", var.resource_type)) ? local.nsg_supported_logs :
+    can(regex("Microsoft\\.Network/virtualNetworks", var.resource_type)) ? local.vnet_supported_logs :
+  var.logs
+)
+
 
   # Filter logs to only those supported
   filtered_logs = [
@@ -70,7 +71,7 @@ resource "azurerm_monitor_diagnostic_setting" "ds" {
   }
 
   # Optional sinks
-  eventhub_name                  = var.eventhub_name
-  eventhub_authorization_rule_id = var.eventhub_auth_rule_id
-  storage_account_id             = var.archive_storage_id
+  eventhub_name                    = var.eventhub_name
+  eventhub_authorization_rule_id   = var.eventhub_auth_rule_id
+  storage_account_id               = var.archive_storage_id
 }
