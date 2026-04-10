@@ -1,9 +1,6 @@
-
 locals {
-
   # Supported logs per resource type
-  storage_supported_logs = [
-  ]
+  storage_supported_logs = [] # Storage has no log categories in the new API
 
   keyvault_supported_logs = [
     "AuditEvent"
@@ -44,6 +41,14 @@ locals {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "ds" {
+  # Only create the resource if at least one sink is valid
+  count = (
+    length(local.filtered_logs) > 0 ||
+    length(local.filtered_metrics) > 0 ||
+    var.eventhub_name != null ||
+    var.archive_storage_id != null
+  ) ? 1 : 0
+
   name                       = "${var.resource_name}-diag"
   target_resource_id         = var.target_resource_id
   log_analytics_workspace_id = var.law_id
