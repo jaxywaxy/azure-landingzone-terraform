@@ -57,6 +57,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Terraform Init
+        working-directory: ${{ github.workspace }}/envs/prod
         run: terraform init -reconfigure
 
       - name: Terraform Plan
