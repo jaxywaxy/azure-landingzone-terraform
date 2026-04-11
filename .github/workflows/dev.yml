@@ -57,7 +57,6 @@ jobs:
       - name: Export Plan to Text
         run: |
           terraform show -no-color tfplan > plan.txt
-        run: terraform init
 
       - name: Terraform Plan
         run: terraform plan -out=tfplan
