@@ -21,6 +21,7 @@ concurrency:
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    environment: dev
 
     env:
       ARM_USE_OIDC: true
