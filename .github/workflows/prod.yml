@@ -28,20 +28,21 @@ jobs:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-    defaults:
-      run:
-        working-directory: envs/prod
-
+      
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set working directory
+        run: echo "##[set-output name=dir;]${{ github.workspace }}/envs/prod"
+        id: workdir
+
       - name: Debug identity
+        working-directory: ${{ github.workspace }}/envs/prod
         run: |
           echo "ARM_CLIENT_ID: $ARM_CLIENT_ID"
           echo "ARM_TENANT_ID: $ARM_TENANT_ID"
           echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
-
-      - name: Checkout
-        uses: actions/checkout@v4
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
