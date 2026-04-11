@@ -21,7 +21,7 @@ concurrency:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    environment: prod   # Requires 2 reviewers, manual approval
+    environment: prod   # GitHub environment with manual approval
 
     env:
       ARM_USE_OIDC: true

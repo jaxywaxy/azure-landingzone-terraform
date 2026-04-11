@@ -5,7 +5,6 @@
 # Terraform core
 # ---------------------------------------------------------
 .terraform/
-.terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.*
 terraform.tfstate.*
@@ -63,13 +62,9 @@ plan.txt
 # Terraform module hygiene
 # ---------------------------------------------------------
 modules/**/.terraform/
-modules/**/.terraform.lock.hcl
 modules/**/terraform.tfstate
 modules/**/terraform.tfstate.*
 
-# ---------------------------------------------------------
-# OS / Editor junk
-# ---------------------------------------------------------
 # ---------------------------------------------------------
 # OS / Editor junk
 # ---------------------------------------------------------
