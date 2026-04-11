@@ -1,15 +1,18 @@
 # ---------------------------------------------------------
 # Terraform core
 # ---------------------------------------------------------
+# ---------------------------------------------------------
+# Terraform core
+# ---------------------------------------------------------
 .terraform/
 terraform.tfstate
 terraform.tfstate.*
+terraform.tfstate.*
 crash.log
-
-# Allow lock file to be committed
-!.terraform.lock.hcl
-
-# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
 override.tf
 override.tf.json
 *_override.tf
@@ -21,7 +24,30 @@ override.tf.json
 # Allow only env-specific tfvars
 *.tfvars
 !envs/**/terraform.tfvars
+# ---------------------------------------------------------
+# Terraform environment files
+# ---------------------------------------------------------
+# Allow only env-specific tfvars
+*.tfvars
+!envs/**/terraform.tfvars
 
+# Prevent accidental auto-loaded tfvars
+terraform.auto.tfvars
+*.auto.tfvars
+
+# ---------------------------------------------------------
+# Terraform plan files
+# ---------------------------------------------------------
+*.tfplan
+plan.txt
+
+# ---------------------------------------------------------
+# Terraform module hygiene
+# ---------------------------------------------------------
+modules/**/.terraform/
+modules/**/.terraform.lock.hcl
+modules/**/terraform.tfstate
+modules/**/terraform.tfstate.*
 # Prevent accidental auto-loaded tfvars
 terraform.auto.tfvars
 *.auto.tfvars
