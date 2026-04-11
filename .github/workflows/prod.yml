@@ -34,11 +34,11 @@ jobs:
         working-directory: envs/prod
 
     steps:
-     - name: Debug identity
-       run: |
-        echo "ARM_CLIENT_ID: $ARM_CLIENT_ID"
-        echo "ARM_TENANT_ID: $ARM_TENANT_ID"
-        echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
+      - name: Debug identity
+        run: |
+          echo "ARM_CLIENT_ID: $ARM_CLIENT_ID"
+          echo "ARM_TENANT_ID: $ARM_TENANT_ID"
+          echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
 
       - name: Checkout
         uses: actions/checkout@v4
