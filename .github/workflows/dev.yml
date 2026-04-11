@@ -22,7 +22,6 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     environment: dev
-    deployment: dev
 
     env:
       ARM_USE_OIDC: true
@@ -43,12 +42,6 @@ jobs:
         with:
           terraform_version: 1.6.6
 
-      - name: Debug Azure secrets
-        run: |
-          echo "CLIENT: $AZURE_CLIENT_ID"
-          echo "TENANT: $AZURE_TENANT_ID"
-          echo "SUB: $AZURE_SUBSCRIPTION_ID"
-
 
       - name: Azure Login (OIDC)
         uses: azure/login@v2
@@ -56,10 +49,6 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      - name: Who am I in Azure?
-        run: az account show --query user
-
 
       - name: Terraform Init
         run: terraform init -reconfigure 
