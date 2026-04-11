@@ -22,6 +22,7 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     environment: dev
+    deployment: dev
 
     env:
       ARM_USE_OIDC: true
