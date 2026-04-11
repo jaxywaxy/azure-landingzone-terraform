@@ -40,6 +40,9 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.6.6
+          
+      - name: Debug Azure Client ID
+        run: echo "AZURE_CLIENT_ID = $AZURE_CLIENT_ID"
 
       - name: Azure Login (OIDC)
         uses: azure/login@v2
