@@ -15,7 +15,7 @@ resource "azurerm_storage_account" "logs" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
-  public_network_access_enabled = false
+  public_network_access_enabled = true
   blob_properties {
     versioning_enabled       = false
     change_feed_enabled      = false
