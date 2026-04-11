@@ -2,6 +2,7 @@ variable "resource_name" {
   type        = string
   description = "Name of the resource for naming the diagnostic setting."
 }
+
 variable "resource_type" {
   type        = string
   description = "Azure resource type (e.g., Microsoft.Storage/storageAccounts)."
@@ -22,10 +23,7 @@ variable "logs" {
   description = "Requested log categories."
   default     = []
 }
-variable "tags" {
-  type    = map(string)
-  default = {}
-}
+
 variable "metrics" {
   type        = list(string)
   description = "Requested metric categories."
