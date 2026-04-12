@@ -9,7 +9,7 @@ resource "azurerm_storage_account" "logging" {
   # Security
   shared_access_key_enabled       = false
   default_to_oauth_authentication = true
-  public_network_access_enabled   = false
+  public_network_access_enabled   = true
   min_tls_version                 = "TLS1_2"
 
   # Disable all secondary services to avoid 403 refresh errors

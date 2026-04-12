@@ -8,7 +8,7 @@ resource "azurerm_storage_account" "general" {
 
   shared_access_key_enabled       = false
   default_to_oauth_authentication = true
-  public_network_access_enabled   = false
+  public_network_access_enabled   = true
   min_tls_version                 = "TLS1_2"
 
   blob_properties {}
