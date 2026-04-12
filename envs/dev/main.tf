@@ -77,7 +77,7 @@ module "logging" {
 module "storage_diagnostics" {
   source             = "../../modules/diagnostic_settings"
   resource_type      = "Microsoft.Storage/storageAccounts"
-  resource_name = 
+  resource_name      = module.logging_sa.name
   target_resource_id = module.logging_sa.id
   law_id             = module.logging.law_id
 
