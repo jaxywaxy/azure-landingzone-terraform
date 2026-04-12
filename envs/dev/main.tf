@@ -54,11 +54,11 @@ module "networking" {
 # LOGGING SA
 # -------------------------------
 module "logging_sa" {
-  source     = "../../modules/storage_account_logging"
-  prefix     = var.prefix
-  location   = var.location
-  rg_name = module.resource_groups.logging_name
-  tags       = module.tags.tags
+  source   = "../../modules/storage_account_logging"
+  prefix   = var.prefix
+  location = var.location
+  rg_name  = module.resource_groups.logging_name
+  tags     = module.tags.tags
 }
 # -------------------------------
 # LOGGING
@@ -76,9 +76,9 @@ module "logging" {
 # -------------------------------
 module "storage_diagnostics" {
   source             = "../../modules/diagnostic_settings"
-  resource_name      = module.logging_sa.name
   resource_type      = "Microsoft.Storage/storageAccounts"
-  target_resource_id = module.logging_said
+  resource_name = 
+  target_resource_id = module.logging_sa.id
   law_id             = module.logging.law_id
 
   logs = []
