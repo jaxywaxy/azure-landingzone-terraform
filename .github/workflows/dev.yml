@@ -50,6 +50,16 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Who am I in Azure?
+        run: az account show --query user
+
+      - name: Check RBAC on logging RG
+        run: |
+          echo "Checking RBAC assignments..."
+          az role assignment list \
+            --scope /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/jacquidev-rg-logging \
+            --query "[].roleDefinitionName"
+
       - name: Terraform Init
         run: terraform init -reconfigure 
 
