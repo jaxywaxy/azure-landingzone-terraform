@@ -16,6 +16,10 @@ resource "azurerm_storage_account" "logging" {
   blob_properties {}
   queue_properties {}
 
+  network_rules {
+  default_action = "Allow"
+  bypass         = ["AzureServices", "Logging", "Metrics"] 
+}
   tags = var.tags
 }
 

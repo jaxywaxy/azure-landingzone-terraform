@@ -6,7 +6,7 @@ resource "azurerm_storage_account" "general" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
-  shared_access_key_enabled       = false
+  shared_access_key_enabled       = true 
   default_to_oauth_authentication = true
   public_network_access_enabled   = true
   min_tls_version                 = "TLS1_2"
@@ -14,6 +14,10 @@ resource "azurerm_storage_account" "general" {
   blob_properties {}
   queue_properties {}
 
+  network_rules {
+  default_action = "Allow"
+  bypass         = ["AzureServices", "Logging", "Metrics"] 
+  }
   tags = var.tags
 }
 
