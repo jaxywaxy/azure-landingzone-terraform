@@ -32,7 +32,7 @@ resource "azurerm_monitor_diagnostic_setting" "ds" {
     var.archive_storage_id != null
   ) ? 1 : 0
 
-  name                       = "${var.resource_name}-diagnostics"
+  name                       = "${var.resource_name}-diag"
   target_resource_id         = var.target_resource_id
   log_analytics_workspace_id = var.law_id
 
