@@ -3,7 +3,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.100"   # or latest stable
+      version = "~> 3.100" # or latest stable
     }
   }
 
@@ -52,6 +52,16 @@ module "networking" {
 }
 
 # -------------------------------
+# LOGGING SA
+# -------------------------------
+module "logging_sa" {
+  source   = "../../modules/storage_account_logging"
+  prefix   = var.prefix
+  location = var.location
+  rg_name  = module.resource_groups.logging_name
+  tags     = module.tags.tags
+}
+# -------------------------------
 # LOGGING
 # -------------------------------
 module "logging" {
@@ -67,14 +77,15 @@ module "logging" {
 # -------------------------------
 module "storage_diagnostics" {
   source             = "../../modules/diagnostic_settings"
-  resource_name      = module.logging.logs_storage_name
   resource_type      = "Microsoft.Storage/storageAccounts"
-  target_resource_id = module.logging.logs_storage_id
+  resource_name      = module.logging_sa.name
+  target_resource_id = module.logging_sa.id
   law_id             = module.logging.law_id
 
   logs = []
   metrics = [
-   "Transaction",
-   "Capacity"
- ]
+    "Transaction",
+    "Capacity"
+  ]
 }
+
