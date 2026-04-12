@@ -21,6 +21,8 @@ concurrency:
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    environment: 
+      name: dev
 
     env:
       ARM_USE_OIDC: true
@@ -44,22 +46,19 @@ jobs:
       - name: Debug Azure Client ID
         run: echo "AZURE_CLIENT_ID = $AZURE_CLIENT_ID"
 
+
       - name: Azure Login (OIDC)
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Show Azure identity
+        run: az account show
+
       - name: Terraform Init
         run: terraform init -reconfigure 
-
-      - name: Terraform Plan
-        run: terraform plan -out=tfplan 
-
-      - name: Export Plan to Text
-        run: |
-          terraform show -no-color tfplan > plan.txt
 
       - name: Terraform Plan
         run: terraform plan -out=tfplan
