@@ -29,17 +29,6 @@ variable "metrics" {
   description = "Requested metric categories."
   default     = []
 }
-
-variable "retention_enabled" {
-  type        = bool
-  default     = false
-}
-
-variable "retention_days" {
-  type        = number
-  default     = 30
-}
-
 variable "eventhub_name" {
   type        = string
   default     = null
@@ -49,7 +38,6 @@ variable "eventhub_auth_rule_id" {
   type        = string
   default     = null
 }
-
 variable "archive_storage_id" {
   type        = string
   default     = null
