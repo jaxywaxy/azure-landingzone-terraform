@@ -50,10 +50,6 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Dump OIDC token claims
-        run: |
-          echo "${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" | cut -d "." -f2 | base64 --decode
-          
       - name: Terraform Init
         run: terraform init -reconfigure 
 
