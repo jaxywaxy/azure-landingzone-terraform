@@ -24,8 +24,30 @@ resource "azurerm_storage_account" "logs" {
     change_feed_enabled      = false
     last_access_time_enabled = false
   }
-  queue_properties {} 
-  
+  queue_properties {
+    logging {
+      delete                = false
+      read                  = false
+      write                 = false
+      version               = "1.0"
+      retention_policy_days = 0
+    }
+
+    hour_metrics {
+      enabled               = false
+      version               = "1.0"
+      include_apis          = false
+      retention_policy_days = 0
+    }
+
+    minute_metrics {
+      enabled               = false
+      version               = "1.0"
+      include_apis          = false
+      retention_policy_days = 0
+    }
+  }
+
   tags = var.tags
 }
 resource "azurerm_storage_management_policy" "logs" {
