@@ -50,13 +50,10 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Show OIDC identity objectId
+      - name: Dump OIDC token claims
         run: |
-          TOKEN=$(az account get-access-token --resource https://storage.azure.com/ --query accessToken -o tsv)
-          HEADER=$(echo $TOKEN | cut -d "." -f2 | base64 --decode 2>/dev/null)
-          echo "Decoded token:"
-          echo $HEADER
-
+          echo "${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" | cut -d "." -f2 | base64 --decode
+          
       - name: Terraform Init
         run: terraform init -reconfigure 
 
