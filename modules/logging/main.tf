@@ -50,4 +50,9 @@ resource "azurerm_storage_container" "logs" {
   name                  = "logs"
   storage_account_name  = azurerm_storage_account.logs.name
   container_access_type = "private"
+
+  depends_on = [
+    azurerm_storage_account.logs,
+    azurerm_storage_management_policy.logs
+  ]
 }
