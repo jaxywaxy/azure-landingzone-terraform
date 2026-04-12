@@ -24,7 +24,8 @@ resource "azurerm_storage_account" "logs" {
     change_feed_enabled      = false
     last_access_time_enabled = false
   }
-
+  queue_properties {} 
+  
   tags = var.tags
 }
 resource "azurerm_storage_management_policy" "logs" {
