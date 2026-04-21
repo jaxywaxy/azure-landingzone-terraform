@@ -1,0 +1,21 @@
+name: terraform-docs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate terraform-docs
+        uses: terraform-docs/gh-actions@v1.0.0
+        with:
+          working-dir: .
+          output-file: README.md
+          output-method: inject
+          config-file: .terraform-docs.yml
