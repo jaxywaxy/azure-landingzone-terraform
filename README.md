@@ -172,3 +172,21 @@ This repository implements a clean, modular, secure Azure Landing Zone with:
 - Safe production deployment  
 
 It is designed for clarity, maintainability, and enterprise‑grade governance.
+
+<!-- BEGIN_TF_DOCS -->
+## Providers
+
+No providers.
+
+## Resources
+
+No resources.
+
+## Inputs
+
+No inputs.
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->
