@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Assume this script is run from the repo root (which pre-commit does)
+# Always run from repo root
+cd "$(git rev-parse --show-toplevel)"
+
 for module in modules/*; do
   if [ -d "$module" ]; then
     if [ -f "$module/README.md" ]; then

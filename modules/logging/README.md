@@ -1,17 +1,10 @@
 # Module: <module-name>
 
 <!-- BEGIN_TF_DOCS -->
-## Providers
-
-| Name | Version |
-| ---- | ------- |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
-
 ## Resources
 
 | Name | Type |
 | ---- | ---- |
-| [azurerm_log_analytics_workspace.law](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace) | resource |
 
 ## Inputs
 

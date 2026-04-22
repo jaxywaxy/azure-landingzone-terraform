@@ -1,19 +1,10 @@
 # Module: <module-name>
 
 <!-- BEGIN_TF_DOCS -->
-## Providers
-
-| Name | Version |
-| ---- | ------- |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
-
 ## Resources
 
 | Name | Type |
 | ---- | ---- |
-| [azurerm_storage_account.logging](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
-| [azurerm_storage_container.logs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |
-| [azurerm_storage_management_policy.logs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_management_policy) | resource |
 
 ## Inputs
 
