@@ -60,12 +60,6 @@ jobs:
         run: |
           terraform show -no-color tfplan > plan.txt
 
-      - name: Terraform Plan
-        run: terraform plan -out=tfplan
-
-      - name: Export Plan to Text
-        run: terraform show -no-color tfplan > plan.txt
-
       - name: Comment Plan on PR
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
