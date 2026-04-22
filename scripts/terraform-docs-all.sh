@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(git rev-parse --show-toplevel)"
-
-for module in "$ROOT_DIR"/modules/*; do
+# Assume this script is run from the repo root (which pre-commit does)
+for module in modules/*; do
   if [ -d "$module" ]; then
     if [ -f "$module/README.md" ]; then
       echo "Updating terraform-docs for module: $(basename "$module")"
