@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: terraform-docs-all-modules
+        name: Run terraform-docs for all modules
+        entry: scripts/terraform-docs-all.sh
+        language: system
+        pass_filenames: false
+

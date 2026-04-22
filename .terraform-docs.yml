@@ -1,14 +1,30 @@
 formatter: markdown table
+
+# Ensures terraform-docs ONLY updates module-level README.md files
 output:
   file: README.md
   mode: inject
+
+# Enterprise-safe: NO recursion, NO nested module scanning
 recursive:
-  enabled: true
-  path: modules
+  enabled: false
+
+# Clean, minimal, human-friendly docs
 sections:
   hide:
-    - requirements
-    - modules
+    - requirements     # Terraform version noise
+    - modules          # Prevents nested module scanning
+    - providers        # Usually redundant in ALZ modules
+    - resources        # Optional: hide if you want cleaner READMEs
+
+# Stable ordering for Git diffs and PR reviews
 sort:
   enabled: true
   by: name
+
+# Optional: enforce consistent table formatting
+markdown:
+  table:
+    header: true
+    indent: 2
+    spacing: 2
