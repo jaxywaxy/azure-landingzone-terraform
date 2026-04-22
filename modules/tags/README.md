@@ -1,10 +1,6 @@
 # Module: <module-name>
 
 <!-- BEGIN_TF_DOCS -->
-## Providers
-
-No providers.
-
 ## Resources
 
 No resources.
