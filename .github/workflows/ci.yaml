@@ -31,9 +31,9 @@ jobs:
         with:
           tflint_version: v0.50.0
 
-      - name: Install tfsec
+      - name: Install Trivy
         run: |
-          curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin latest
 
       - name: Install terraform-docs
         run: |
