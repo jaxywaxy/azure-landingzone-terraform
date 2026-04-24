@@ -21,7 +21,7 @@ concurrency:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    environment: 
+    environment:
       name: prod
 
     env:
@@ -51,7 +51,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -reconfigure
 
       - name: Terraform Plan
         run: terraform plan -out=tfplan
@@ -68,7 +68,7 @@ jobs:
             const plan = fs.readFileSync('envs/prod/plan.txt', 'utf8');
 
             const body = `
-            ### 🧪 Terraform Plan (Prod)
+            ### 🚀 Terraform Plan (Prod)
 
             <details><summary>Click to expand</summary>
 

@@ -1,3 +1,17 @@
+
+terraform {
+  required_version = ">= 1.6.0"
+}
+
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.0"
+    }
+  }
+}
+
 resource "azurerm_virtual_network" "hub" {
   name                = "${var.prefix}-vnet-hub"
   location            = var.location
@@ -64,4 +78,3 @@ resource "azurerm_virtual_network_peering" "apps_to_hub" {
   allow_forwarded_traffic   = true
   use_remote_gateways       = false
 }
-

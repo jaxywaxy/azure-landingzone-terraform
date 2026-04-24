@@ -1,6 +1,8 @@
 variable "environment" {
-  type = string
+  description = "The environment for the landing zone."
+  type        = string
 }
 variable "location" {
-  type = string
+  description = "Azure region for the resources."
+  type        = string
 }

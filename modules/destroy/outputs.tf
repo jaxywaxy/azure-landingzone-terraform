@@ -1,3 +1,4 @@
 output "environment" {
-  value = var.environment
+  description = "The environment for the landing zone"
+  value       = var.environment
 }
