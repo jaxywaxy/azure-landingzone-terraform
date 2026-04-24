@@ -1,4 +1,49 @@
 repos:
+  # ------------------------------------------------------------
+  # Terraform formatting + validation (with init + recursive)
+  # ------------------------------------------------------------
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.88.0
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_validate
+      - id: terraform_tflint
+        args:
+          - --init-args=-backend=false
+          - --args=--recursive
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+  # ------------------------------------------------------------
+  # trivy (security scanning)
+  # ------------------------------------------------------------
+  - repo: https://github.com/cebidhem/pre-commit-trivy
+    rev: v0.2.0  # Use the latest version
+    hooks:
+      - id: trivy-scan
+        # Optional: customize arguments
+        args: ['--severity', 'HIGH,CRITICAL', ]
+  # ------------------------------------------------------------
+  # YAML / JSON / whitespace / merge conflict linters
+  # ------------------------------------------------------------
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  # ------------------------------------------------------------
+  # ShellCheck (for scripts/)
+  # ------------------------------------------------------------
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+
+  # ------------------------------------------------------------
+  # Terraform-docs for all modules (your custom script)
+  # ------------------------------------------------------------
   - repo: local
     hooks:
       - id: terraform-docs-all-modules
@@ -6,4 +51,3 @@ repos:
         entry: scripts/terraform-docs-all.sh
         language: system
         pass_filenames: false
-

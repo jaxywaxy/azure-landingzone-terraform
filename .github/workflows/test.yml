@@ -21,7 +21,7 @@ concurrency:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    environment: 
+    environment:
       name: test
 
     env:
@@ -51,10 +51,10 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Terraform Init
-        run: terraform init -reconfigure 
+        run: terraform init -reconfigure
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan 
+        run: terraform plan -out=tfplan
 
       - name: Export Plan to Text
         run: |

@@ -1,0 +1,67 @@
+name: Terraform CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform-ci:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # -----------------------------
+      # Install tooling
+      # -----------------------------
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.5
+
+      - name: Install TFLint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: v0.50.0
+
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin latest
+
+      - name: Install terraform-docs
+        run: |
+          curl -sSLo terraform-docs.tar.gz \
+            https://github.com/terraform-docs/terraform-docs/releases/download/v0.18.0/terraform-docs-v0.18.0-linux-amd64.tar.gz
+          tar -xzf terraform-docs.tar.gz
+          sudo mv terraform-docs /usr/local/bin/
+
+      - name: Install pre-commit
+        run: |
+          pip install pre-commit
+
+      # -----------------------------
+      # Run pre-commit (same as local)
+      # -----------------------------
+      - name: Run pre-commit checks
+        run: |
+          pre-commit run --all-files --show-diff-on-failure
+
+      # -----------------------------
+      # Auto-commit terraform-docs updates (optional but enterprise-friendly)
+      # -----------------------------
+      - name: Commit updated docs
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git add .
+            git commit -m "chore: update terraform-docs output"
+          fi

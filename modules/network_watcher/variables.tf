@@ -32,9 +32,7 @@ variable "law_workspace_id" {
   type        = string
   description = "Workspace ID (GUID) of the Log Analytics Workspace."
 }
-
-variable "tags" {
+/* variable "tags" {
   type        = map(string)
   default     = {}
-  description = "Tags to apply to supported resources (Network Watcher does not support tags)."
-}
+  description = "Tags to apply to supported resources (Network Watcher does not support tags)." */

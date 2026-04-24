@@ -1,18 +1,22 @@
 variable "prefix" {
-  type = string
+  description = "Prefix for all resources in the landing zone."
+  type        = string
 }
 
 variable "location" {
-  type = string
+  description = "Azure region for the resources."
+  type        = string
 }
 
-variable "tags" {
+/*variable "tags" {
   type = map(string)
-}
+} */
 variable "global_tags" {
-  type = map(string)
+  description = "Global tags to apply to all resources in the landing zone."
+  type        = map(string)
 }
 
 variable "environment_tags" {
-  type = map(string)
+  description = "Tags specific to the environment."
+  type        = map(string)
 }
