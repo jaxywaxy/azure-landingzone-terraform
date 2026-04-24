@@ -1,6 +1,6 @@
 # Azure Landing Zone — Terraform Deployment Pipeline
 
-This repository implements a modular, multi‑environment Azure Landing Zone using Terraform and GitHub Actions.  
+This repository implements a modular, multi‑environment Azure Landing Zone using Terraform and GitHub Actions.
 It supports **Dev**, **Test**, and **Prod** environments with isolated state, controlled promotion, and secure OIDC authentication.
 
 ---
@@ -9,12 +9,12 @@ It supports **Dev**, **Test**, and **Prod** environments with isolated state, co
 
 This project provisions a foundational Azure Landing Zone including:
 
-- Resource groups  
-- Networking  
-- Logging  
-- Diagnostic settings  
-- Environment‑specific configuration  
-- Secure GitHub Actions CI/CD using Azure OIDC  
+- Resource groups
+- Networking
+- Logging
+- Diagnostic settings
+- Environment‑specific configuration
+- Secure GitHub Actions CI/CD using Azure OIDC
 
 Each environment (`dev`, `test`, `prod`) is deployed independently using its own Terraform backend state and GitHub Actions workflow.
 
@@ -40,9 +40,9 @@ Each environment (`dev`, `test`, `prod`) is deployed independently using its own
         └── prod.yml
 
 ### Key principles:
-- **Modules** contain reusable infrastructure logic  
-- **Environments** contain only configuration + backend + provider blocks  
-- **Workflows** deploy each environment independently  
+- **Modules** contain reusable infrastructure logic
+- **Environments** contain only configuration + backend + provider blocks
+- **Workflows** deploy each environment independently
 
 ---
 
@@ -51,9 +51,9 @@ Each environment (`dev`, `test`, `prod`) is deployed independently using its own
 All deployments use **GitHub → Azure OIDC** for passwordless authentication.
 
 This eliminates:
-- Service principals with secrets  
-- Secret rotation  
-- Credential leaks  
+- Service principals with secrets
+- Secret rotation
+- Credential leaks
 
 Each workflow logs into Azure using:
 
@@ -105,7 +105,7 @@ Apply requires strict approval via GitHub Environments
 Purpose:
 Safe, auditable production deployments with mandatory human approval.
 
-Terraform State Layout 
+Terraform State Layout
 Each environment uses its own Azure Storage backend:
 tfstate/dev.tfstate
 tfstate/test.tfstate
@@ -131,9 +131,9 @@ Plan runs
 
 Prod apply requires approval
 
-Concurrency and Safety 
+Concurrency and Safety
 
-Each workflow uses 
+Each workflow uses
 concurrency:
   group: terraform-<env>
   cancel-in-progress: true
@@ -154,10 +154,10 @@ This gives reviewers full visibility into infrastructure changes before approval
 
 ## Requirements
 
-- Terraform ≥ 1.6  
-- AzureRM provider ≥ 3.x  
-- GitHub OIDC configured  
-- Azure Storage account for backend state  
+- Terraform ≥ 1.6
+- AzureRM provider ≥ 3.x
+- GitHub OIDC configured
+- Azure Storage account for backend state
 
 ---
 
@@ -165,10 +165,28 @@ This gives reviewers full visibility into infrastructure changes before approval
 
 This repository implements a clean, modular, secure Azure Landing Zone with:
 
-- Multi‑environment Terraform  
-- OIDC‑based GitHub Actions  
-- PR‑driven plans  
-- Controlled promotion  
-- Safe production deployment  
+- Multi‑environment Terraform
+- OIDC‑based GitHub Actions
+- PR‑driven plans
+- Controlled promotion
+- Safe production deployment
 
 It is designed for clarity, maintainability, and enterprise‑grade governance.
+
+<!-- BEGIN_TF_DOCS -->
+## Providers
+
+No providers.
+
+## Resources
+
+No resources.
+
+## Inputs
+
+No inputs.
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

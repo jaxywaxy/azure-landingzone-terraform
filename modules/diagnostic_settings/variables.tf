@@ -31,14 +31,17 @@ variable "metrics" {
 }
 variable "eventhub_name" {
   type        = string
+  description = "Name of the Event Hub to send diagnostics to."
   default     = null
 }
 
 variable "eventhub_auth_rule_id" {
   type        = string
+  description = "Resource ID of the Event Hub authorization rule for diagnostics to use."
   default     = null
 }
 variable "archive_storage_id" {
   type        = string
+  description = "Resource ID of the storage account for archiving diagnostics."
   default     = null
 }

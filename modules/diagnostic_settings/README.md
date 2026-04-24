@@ -10,9 +10,9 @@
 
 | Name | Description | Type | Default | Required |
 | ---- | ----------- | ---- | ------- | :------: |
-| <a name="input_archive_storage_id"></a> [archive\_storage\_id](#input\_archive\_storage\_id) | n/a | `string` | `null` | no |
-| <a name="input_eventhub_auth_rule_id"></a> [eventhub\_auth\_rule\_id](#input\_eventhub\_auth\_rule\_id) | n/a | `string` | `null` | no |
-| <a name="input_eventhub_name"></a> [eventhub\_name](#input\_eventhub\_name) | n/a | `string` | `null` | no |
+| <a name="input_archive_storage_id"></a> [archive\_storage\_id](#input\_archive\_storage\_id) | Resource ID of the storage account for archiving diagnostics. | `string` | `null` | no |
+| <a name="input_eventhub_auth_rule_id"></a> [eventhub\_auth\_rule\_id](#input\_eventhub\_auth\_rule\_id) | Resource ID of the Event Hub authorization rule for diagnostics to use. | `string` | `null` | no |
+| <a name="input_eventhub_name"></a> [eventhub\_name](#input\_eventhub\_name) | Name of the Event Hub to send diagnostics to. | `string` | `null` | no |
 | <a name="input_law_id"></a> [law\_id](#input\_law\_id) | Log Analytics Workspace ID. | `string` | n/a | yes |
 | <a name="input_logs"></a> [logs](#input\_logs) | Requested log categories. | `list(string)` | `[]` | no |
 | <a name="input_metrics"></a> [metrics](#input\_metrics) | Requested metric categories. | `list(string)` | `[]` | no |

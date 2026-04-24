@@ -1,15 +1,19 @@
 variable "prefix" {
-  type = string
+  description = "Prefix for all resources in the landing zone."
+  type        = string
 }
 
 variable "location" {
-  type = string
+  description = "Azure region for the resources."
+  type        = string
 }
 
 variable "rg_network" {
-  type = string
+  description = "Name of the networking resource group."
+  type        = string
 }
 variable "tags" {
-  type    = map(string)
-  default = {}
+  description = "Tags to apply to the networking resources."
+  type        = map(string)
+  default     = {}
 }
