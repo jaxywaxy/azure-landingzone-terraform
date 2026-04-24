@@ -17,7 +17,6 @@
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | Prefix used for naming Network Watcher resources. | `string` | n/a | yes |
 | <a name="input_rg_networking"></a> [rg\_networking](#input\_rg\_networking) | Resource group where Network Watcher will be deployed. | `string` | n/a | yes |
 | <a name="input_storage_account_id"></a> [storage\_account\_id](#input\_storage\_account\_id) | Resource ID of the storage account used for NSG flow logs. | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to supported resources (Network Watcher does not support tags). | `map(string)` | `{}` | no |
 
 ## Outputs
 

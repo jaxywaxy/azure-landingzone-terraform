@@ -1,3 +1,14 @@
+terraform {
+  required_version = ">= 1.6.0"
+}
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.100"
+    }
+  }
+}
 resource "azurerm_resource_group" "platform" {
   name     = "${var.prefix}-rg-platform"
   location = var.location

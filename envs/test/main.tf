@@ -16,7 +16,7 @@ terraform {
 }
 
 
-data "azurerm_client_config" "current" {}
+/* data "azurerm_client_config" "current" {} */
 
 # -------------------------------
 # TAGGING MODULE (must be first)
@@ -88,4 +88,3 @@ module "storage_diagnostics" {
     "Capacity"
   ]
 }
-

@@ -1,7 +1,7 @@
 prefix   = "jacquidev"
 location = "australiaeast"
 
-tags = {
+/* tags = {
   environment  = "dev"
   owner        = "jacqui"
   project      = "landingzone"
@@ -9,7 +9,7 @@ tags = {
   businessunit = "cloud"
   createdby    = "terraform"
   managedby    = "terraform"
-}
+} */
 global_tags = {
   owner        = "jacqui"
   costcenter   = "engineering"

@@ -1,3 +1,14 @@
+terraform {
+  required_version = ">= 1.6.0"
+}
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.100"
+    }
+  }
+}
 resource "azurerm_storage_account" "general" {
   name                     = "${var.prefix}${var.suffix}"
   resource_group_name      = var.rg_name
@@ -6,7 +17,7 @@ resource "azurerm_storage_account" "general" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
-  shared_access_key_enabled       = true 
+  shared_access_key_enabled       = true
   default_to_oauth_authentication = true
   public_network_access_enabled   = true
   min_tls_version                 = "TLS1_2"
@@ -15,8 +26,8 @@ resource "azurerm_storage_account" "general" {
   queue_properties {}
 
   network_rules {
-  default_action = "Allow"
-  bypass         = ["AzureServices", "Logging", "Metrics"] 
+    default_action = "Allow"
+    bypass         = ["AzureServices", "Logging", "Metrics"]
   }
   tags = var.tags
 }

@@ -1,3 +1,14 @@
+terraform {
+  required_version = ">= 1.6.0"
+}
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.100"
+    }
+  }
+}
 resource "azurerm_storage_account" "logging" {
   name                     = "${var.prefix}logstore"
   resource_group_name      = var.rg_name
@@ -17,9 +28,9 @@ resource "azurerm_storage_account" "logging" {
   queue_properties {}
 
   network_rules {
-  default_action = "Allow"
-  bypass         = ["AzureServices", "Logging", "Metrics"] 
-}
+    default_action = "Allow"
+    bypass         = ["AzureServices", "Logging", "Metrics"]
+  }
   tags = var.tags
 }
 

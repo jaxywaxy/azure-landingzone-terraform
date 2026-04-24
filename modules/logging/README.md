@@ -19,6 +19,6 @@
 
 | Name | Description |
 | ---- | ----------- |
-| <a name="output_law_id"></a> [law\_id](#output\_law\_id) | n/a |
-| <a name="output_law_name"></a> [law\_name](#output\_law\_name) | n/a |
+| <a name="output_law_id"></a> [law\_id](#output\_law\_id) | The resource ID of the Log Analytics Workspace |
+| <a name="output_law_name"></a> [law\_name](#output\_law\_name) | The name of the Log Analytics Workspace |
 <!-- END_TF_DOCS -->

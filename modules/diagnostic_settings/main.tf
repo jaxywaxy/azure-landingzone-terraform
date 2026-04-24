@@ -1,9 +1,9 @@
 locals {
   # Supported logs per resource type
-  storage_supported_logs = []
+  storage_supported_logs  = []
   keyvault_supported_logs = ["AuditEvent"]
-  nsg_supported_logs = ["NetworkSecurityGroupEvent", "NetworkSecurityGroupRuleCounter"]
-  vnet_supported_logs = ["VMProtectionAlerts", "VMInsights", "NetworkSecurityGroupEvent"]
+  nsg_supported_logs      = ["NetworkSecurityGroupEvent", "NetworkSecurityGroupRuleCounter"]
+  vnet_supported_logs     = ["VMProtectionAlerts", "VMInsights", "NetworkSecurityGroupEvent"]
 
   supported_logs = (
     can(regex("Microsoft\\.Storage", var.resource_type)) ? local.storage_supported_logs :
@@ -22,6 +22,17 @@ locals {
     for m in var.metrics : m
     if m != null
   ]
+}
+terraform {
+  required_version = ">= 1.6.0"
+}
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.100"
+    }
+  }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "ds" {
